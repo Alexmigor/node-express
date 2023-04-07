@@ -6,37 +6,6 @@ app.use(express.json())
 app.use(express.static('build'))
 app.use(cors())
 
-let notes = [
-  {
-    id: 1,
-    content: "HTML is easy",
-    important: true
-  },
-  {
-    id: 2,
-    content: "Browser can execute only JavaScript",
-    important: false
-  },
-  {
-    id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
-    important: true
-  },
-  {
-    id: 4,
-    content: "*******************************************",
-    important: true
-  }
-]
-
-// const requestLogger = (req, res, next) => {
-//   console.log('Method:', request.method)
-//   console.log('Path:  ', request.path)
-//   console.log('Body:  ', request.body)
-//   console.log('---')
-//   next()
-// }
-// app.use(requestLogger)
 
 const generareId = () => {
   const maxId = notes.length > 0
@@ -87,8 +56,8 @@ app.post('/api/notes', (request, response) => {
   response.json(note)
 })
 
-const unknowEndPoint = (req, res) => response.status(404).send({ error: 'unknown endpoint' })
-app.use(unknowEndPoint)
+// const unknowEndPoint = (req, res) => response.status(404).send({ error: 'unknown endpoint' })
+// app.use(unknowEndPoint)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
