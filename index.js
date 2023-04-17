@@ -1,14 +1,23 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+require('dotenv').config()
 
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
+const Message = require('./models/note')
+
+
+
+// const requestLogger = (request, response, next) => {
+//   console.log('Method:', request.method)
+//   console.log('Path:  ', request.path)
+//   console.log('Body:  ', request.body)
+//   console.log('---')
+//   next()
+// }
+
+
+
+// const Message = mongoose.model('Message', noteSchema)
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
@@ -16,7 +25,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(cors())
 app.use(express.json())
-app.use(requestLogger)
+// app.use(requestLogger)
 app.use(express.static('build'))
 
 let notes = [
@@ -43,7 +52,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/notes', (req, res) => {
-  res.json(notes)
+  Message.find({}).then(messeges => {
+    res.json(messeges)
+  })
 })
 
 const generateId = () => {
@@ -96,7 +107,7 @@ app.delete('/api/notes/:id', (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
