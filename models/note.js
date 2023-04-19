@@ -2,8 +2,6 @@ const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
-// const password = 'Myhora'
-// const url = `mongodb+srv://alexmigor:${password}@cluster0.bri9tnb.mongodb.net/myChat?retryWrites=true&w=majority`
 
 const url = process.env.MONGODB_URL
 
@@ -19,6 +17,7 @@ mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
     content: String,
+    author: String,
     important: Boolean,
 })
 
@@ -30,4 +29,4 @@ noteSchema.set('toJSON', {
     }
 })
 
-module.exports = mongoose.model('Message', noteSchema)
+module.exports = mongoose.model('Note', noteSchema)
