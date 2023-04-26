@@ -77,7 +77,7 @@ app.post('/api/notes', (request, response) => {
   //   date: new Date(),
   //   id: generateId(),
   // }
-
+  
   const note = new Note({
     content: body.content,
     author: body.author,
