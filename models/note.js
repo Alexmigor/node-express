@@ -18,7 +18,7 @@ mongoose.connect(url)
 const noteSchema = new mongoose.Schema({
     content: String,
     author: String,
-    date: new Date(),
+    date: Date,
     important: Boolean,
 })
 
