@@ -1,6 +1,0 @@
-GET http://localhost:3001/api/notes/64401aff37172190e901c227
-Content-Type: application/json
-
-{
-    "content": "Mongo!"
-}
